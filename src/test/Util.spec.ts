@@ -1,12 +1,6 @@
-import chai = require('chai');
-import mocha = require('mocha');
-import {Pt} from '../Pt';
+import {assert} from 'chai';
+import {describe, it} from 'mocha';
 import {Const, Util} from '../Util';
-import {Num, Geom} from '../Num';
-import {Line} from '../Op';
-
-var {assert} = chai;
-var {describe, it} = mocha;
 
 
 describe('Util: ', function() {

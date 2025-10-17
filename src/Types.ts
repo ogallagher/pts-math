@@ -1,8 +1,6 @@
 /*! Pts.js is licensed under Apache License 2.0. Copyright © 2017-current William Ngan and contributors. (https://github.com/williamngan/pts) */
 
-import {Pt, Group, Bound} from "./Pt";
-import {Space} from "./Space";
-import {UI} from "./UI";
+import {Pt, Group} from "./Pt";
 
 /**
  * Typescript interface: IPt is an interface that represents an object with x, y, z, w properties.
@@ -45,27 +43,6 @@ export type PtLikeIterable = GroupLike | PtLike[] | Iterable<PtLike>;
  * Typescript type: AnimateCallbackFn represents a callback function for animation. It accepts parameters to keep track of current time, current frame-time, and current space instance.
  */
 export type AnimateCallbackFn = ( time:number, frameTime:number, currentSpace:any ) => void;
-
-
-/**
-* Typescript interface: IPlayer is an interface that represents a "player" object that can be added into a Space.
-*/
-export interface IPlayer {
-  animateID?: string;
-  animate?:AnimateCallbackFn;
-  resize?( bound:Bound, evt?:Event ): void;
-  action?( type:string, px:number, py:number, evt:Event ): void;
-  start?( bound:Bound, space:Space ): void;
-}
-
-
-/**
- * Typescript interface: ISpacePlayers represents a map of IPlayer instances.
- */
-export interface ISpacePlayers {
-  [key: string]: IPlayer;
-}
-
 
 /**
  *Typescript interface: ITimer represents a time-recording object.
@@ -139,12 +116,6 @@ export type IntersectContext = {
   edge: Group,
   other?: any
 };
-
-
-/**
- * Typescript type: UIHandler represents a callback function to handle UI actions.
- */
-export type UIHandler = ( target:UI, pt:PtLike, type:string, evt:MouseEvent ) => void;
 
 
 /**

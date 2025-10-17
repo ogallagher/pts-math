@@ -1,8 +1,7 @@
 /*! Pts.js is licensed under Apache License 2.0. Copyright © 2017-current William Ngan and contributors. (https://github.com/williamngan/pts) */
 
-import { CanvasSpace } from "./Canvas";
 import { Num } from "./Num";
-import {Group, Pt} from "./Pt";
+import {Group} from "./Pt";
 import {WarningType, PtLikeIterable} from "./Types";
 
 
@@ -295,53 +294,6 @@ export class Util {
 
 
   /**
-   * A helper function to load data from a url via XMLHttpRequest GET. Since the response passed into callback is a string, if you're loading json data, you may use standard `JSON.parse(response)` to get a JSON object. For csv, try using a javascript csv library like papaparse or vega/datalib.
-   * @param url the request url
-   * @param callback a function to capture the data. It receives two parameters: a `response` as string, and a `success` status as boolean.
-   */
-  static load( url:string, callback:( response:string, success:boolean ) => void ) {
-    let request = new XMLHttpRequest();
-    request.open( 'GET', url, true );
-
-    request.onload = function() {
-      if ( request.status >= 200 && request.status < 400 ) {
-        callback( request.responseText, true );
-      } else {
-        callback( `Server error (${request.status}) when loading "${url}"`, false );
-      }
-    };
-
-    request.onerror = function() {
-      callback( `Unknown network error`, false );
-    };
-
-    request.send();
-  }
-
-
-  /**
-   * Download the current `CanvasSpace` as an image (jpg/png/webp). Calling this function will automatically trigger a download.
-   * @param space an instance of `CanvasSpace`
-   * @param filename the name of the file, without the extension name. 
-   * @param filetype the image type (jpg/png/webp)
-   * @param quality a value between 0 to 1, if filetype is either "jpg" or "png"
-   */
-  static download( space: CanvasSpace, filename:string = 'pts_canvas_image', filetype:( "jpeg" | "jpg" | "png" | "webp" ) = "png", quality:number = 1 ) {
-    const ftype = filetype === 'jpg' ? 'jpeg' : filetype;
-    space.element.toBlob( function( blob ) {
-      const link = document.createElement( 'a' );
-      const url = URL.createObjectURL( blob );
-      link.href = url;
-      link.download = `${filename}.${filetype}`;
-      document.body.appendChild( link );
-      link.click();
-      document.body.removeChild( link );
-      URL.revokeObjectURL( url );
-    },`image/${ftype}`, quality );
-  }
-
-
-  /**
    * Estimate performance by checking how long it takes to render a frame
    * @param avgFrames The number of frames used calculate to average
    * @example `let perf = Util.performance(); perf();` 
@@ -379,14 +331,6 @@ export class Util {
    */
   static iterToArray( it:Iterable<any> ): any[] {
     return ( !Array.isArray( it ) ) ? [...it] : it;
-  }
-  
-
-  /**
-   * Check if accessing from a mobile device. Can be useful since some experimental features may not be availble in mobile browsers.
-   */
-  static isMobile() {
-    return /iPhone|iPad|Android/i.test( navigator.userAgent );
   }
 
 
