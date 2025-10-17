@@ -4,6 +4,4 @@ export * from "./Num";
 export * from "./Op";
 export * from "./Pt";
 export * from "./Util";
-export * from "./Physics";
-export * from "./Play";
 export * from "./Types";
